@@ -1,9 +1,0 @@
-#系统自定义样式 
-
-.zeusError{
-		color: red;
-}
-
-table td{
-	overflow:hidden;white-space:nowrap;text-overflow:ellipsis;
-}
