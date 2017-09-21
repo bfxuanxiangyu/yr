@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.weeds.dao.quotations.QuotationsMapper">
+
+	
+	<resultMap id="quotationsMap" type="quotations">
+		<id property="id" column="id" />
+		<result property="userId" column="user_id" />
+		<result property="createdTime" column="created_time" />
+		<result property="updateTime" column="update_time" />
+		<result property="content" column="content" />
+		<result property="deleteFlag" column="delete_flag" />
+		<result property="realName" column="real_name" />
+		<collection property="commentList" ofType="QuotationsComment"
+			javaType="ArrayList" column="id" select="getQuotationsCommentList">
+			<id property="id" column="id" />
+			<result property="userId" column="user_id" />
+			<result property="quotationsId" column="quotations_id" />
+			<result property="createdTime" column="created_time" />
+			<result property="updateTime" column="update_time" />
+			<result property="content" column="content" />
+			<result property="deleteFlag" column="delete_flag" />
+			<result property="realName" column="real_name" />
+		</collection>
+		<collection property="laudList" ofType="QuotationsLaud"
+			javaType="ArrayList" column="id" select="getQuotationsLaudList">
+			<id property="id" column="id" />
+			<result property="userId" column="user_id" />
+			<result property="quotationsId" column="quotations_id" />
+			<result property="createdTime" column="created_time" />
+			<result property="updateTime" column="update_time" />
+			<result property="deleteFlag" column="delete_flag" />
+			<result property="realName" column="real_name" />
+		</collection>
+	</resultMap>
+	
+	<!-- 语录列表 -->
+    <select id="getQuotationsList" resultMap="quotationsMap" parameterType="map">
+      select q.*,ru.real_name from t_quotations q left join t_register_user ru on q.user_id = ru.id where 1=1 
+      <if test=" deleteFlag != null">
+	      and   q.delete_flag = #{deleteFlag}
+      </if>
+      <if test=" info != null">
+	      and  q.content like concat('%',#{info},'%') 
+      </if>
+      order by q.create_time desc
+      <if test="begin != null">
+	       limit #{begin},#{end}
+       </if>
+    </select>
+	<!-- 语录条数 -->
+    <select id="getQuotationsCount" resultType="int" parameterType="map">
+        select count(1) from t_quotations where 1=1 
+      <if test=" deleteFlag != null">
+	      and  delete_flag = #{deleteFlag}
+      </if>
+      <if test=" info != null">
+	      and  content like concat('%',#{info},'%')
+      </if>
+    </select>
+
+	<!-- 语录评论列表 -->
+    <select id="getQuotationsCommentList" resultType="quotationsComment" parameterType="map">
+      select qc.*,ru.real_name from t_quotations_comment qc left join t_register_user ru on qc.user_id = ru.id 
+      where qc.delete_flag = 0 and qc.quotations_id = #{id}
+      order by qc.create_time desc
+    </select>
+    
+	<!-- 语录点赞列表 -->
+    <select id="getQuotationsLaudList" resultType="quotationsLaud" parameterType="map">
+      select ql.*,ru.real_name from t_quotations_laud ql left join t_register_user ru on ql.user_id = ru.id 
+      where ql.delete_flag = 0 and ql.quotations_id = #{id}
+      order by ql.create_time desc
+    </select>
+
+</mapper>

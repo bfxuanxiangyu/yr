@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.weeds.dao.RegisterUserMapper">
+
+    <select id="getRegisterUserList" resultType="registerUser" parameterType="map">
+      select * from t_register_user where 1=1 
+      <if test=" deleteFlag != null">
+	      and   delete_flag = #{deleteFlag}
+      </if>
+      <if test=" info != null">
+	      and 
+	      (real_name like concat('%',#{info},'%') 
+	      or phone like concat('%',#{info},'%') 
+	      or address like concat('%',#{info},'%') 
+	      or email like concat('%',#{info},'%') 
+	      )
+      </if>
+      order by create_time desc
+      <if test="begin != null">
+	       limit #{begin},#{end}
+       </if>
+    </select>
+
+    <select id="getRegisterUserCount" resultType="int" parameterType="map">
+        select count(1) from t_registerUser where 1=1 
+      <if test=" deleteFlag != null">
+	      and   delete_flag = #{deleteFlag}
+      </if>
+      <if test=" info != null">
+	      and 
+	      (real_name like concat('%',#{info},'%') 
+	      or phone like concat('%',#{info},'%') 
+	      or address like concat('%',#{info},'%') 
+	      or email like concat('%',#{info},'%') 
+	      )
+      </if>
+    </select>
+
+
+</mapper>

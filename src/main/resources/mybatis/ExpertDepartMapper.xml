@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.weeds.dao.ExpertDepartMapper">
+
+    <select id="getExpertDepartList" resultType="expertDepart" parameterType="map">
+      select * from expert_depart where 1=1 
+      <if test=" deleteFlag != null">
+	      and   c_delete_flag = #{deleteFlag}
+      </if>
+      <if test=" info != null">
+	      and c_departments like concat('%',#{info},'%')
+      </if>
+      order by c_create_date desc
+      <if test="begin != null">
+	       limit #{begin},#{end}
+       </if>
+    </select>
+
+    <select id="getExpertDepartCount" resultType="int" parameterType="map">
+        select count(1) from expert_depart where 1=1 
+      <if test=" deleteFlag != null">
+	      and   c_delete_flag = #{deleteFlag}
+      </if>
+      <if test=" info != null">
+	      and c_departments like concat('%',#{info},'%')
+      </if>
+    </select>
+
+
+</mapper>

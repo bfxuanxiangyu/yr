@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.weeds.dao.FamilyMapper">
+
+    <select id="getFamilyList" resultType="family" parameterType="map">
+      select * from t_family where 1=1 
+      <if test=" status != null">
+	      and   status = #{status}
+      </if>
+      <if test=" info != null">
+	      and 
+	      (ch_name like concat('%',#{info},'%') 
+	      or en_name like concat('%',#{info},'%') 
+	      or address like concat('%',#{info},'%') 
+	      or qq like concat('%',#{info},'%') 
+	      or wx like concat('%',#{info},'%') 
+	      or mobile like concat('%',#{info},'%') 
+	      )
+      </if>
+      order by create_time desc
+      <if test="begin != null">
+	       limit #{begin},#{end}
+       </if>
+    </select>
+
+    <select id="getFamilyCount" resultType="int" parameterType="map">
+        select count(1) from t_family where 1=1 
+      <if test=" status != null">
+	      and   status = #{status}
+      </if>
+      <if test=" info != null">
+	      and 
+	      (ch_name like concat('%',#{info},'%') 
+	      or en_name like concat('%',#{info},'%') 
+	      or address like concat('%',#{info},'%') 
+	      or qq like concat('%',#{info},'%') 
+	      or wx like concat('%',#{info},'%') 
+	      or mobile like concat('%',#{info},'%') 
+	      )
+      </if>
+    </select>
+
+
+</mapper>

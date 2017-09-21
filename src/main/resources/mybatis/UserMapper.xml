@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace必须指向Dao接口 -->
+<mapper namespace="com.weeds.dao.UserDao">
+    <!-- 用户信息 -->
+    <resultMap id="userDetailMap" type="User">
+        <id property="id" column="id" />
+		<result property="nickname" column="nickname" />
+		<result property="loginName" column="loginName" />
+		<result property="password" column="password" />
+		<result property="gender" column="gender" />
+		<result property="birthday" column="birthday" />
+		<result property="province" column="province" />
+		<result property="city" column="city" />
+		<result property="avatarUrl" column="avatar_url" />
+		<result property="intro" column="intro" />
+		<result property="updateTime" column="update_time" />
+		<result property="createdTime" column="created_time" />
+    </resultMap>
+	<!--
+		获取用户: 输出直接映射到对象, login_name列要"as loginName"以方便映射 ,team_id as "team.id"创建team对象并赋值
+	-->
+	<select id="get" parameterType="int" resultMap="userDetailMap">
+		select u.id, u.nickname, 
+		u.login_name as loginName,
+		u.password as password,
+		ud.*
+		from t_user u 
+		left join t_user_detail ud on u.id=ud.user_id 
+		where u.id=#{id}
+	</select>
+	
+	<select id="findByLoginName" parameterType="string" resultType="User">
+		select id, nickname, 
+		login_name as loginName,
+		password as password,
+		salt as salt
+		from t_user
+		where login_name=#{loginName}
+	</select>
+
+	<!-- 查询用户,演示: 1.输入用map传入多个参数 2.<where>语句, 智能添加where和and关键字 3.输出直接映射对象 -->
+	<select id="search" parameterType="map" resultType="User">
+		select id, name, email,
+		login_name as loginName,
+		team_id as "team.id"
+		from ss_user
+		<where>
+			1=1 and login_name != 'admin'
+			<if test="loginName != null">
+				and login_name=#{loginName}
+			</if>
+			<if test="name != null">
+				and name=#{name}
+			</if>
+		</where>
+	</select>
+
+	<!-- 插入用户： 1.由数据库生成id并赋值到user对象 2.输入用对象, 嵌套属性表达式#{team.id} -->
+	<insert id="save" parameterType="User" useGeneratedKeys="true" keyProperty="id">
+		insert into t_user (
+		login_name, nickname, password,salt)
+		values (
+		#{loginName}, #{nickname}, #{password},#{salt})
+	</insert>
+	
+	<!-- 更新用户信息 -->
+	<update id="update" parameterType="User">
+	    update t_user set nickname=#{nickname},birthday=#{birthday},gender=#{gender},avatar_url=#{avatarUrl} where id=#{id}
+	</update>
+	
+	<!-- 删除用户 -->
+	<delete id="delete" parameterType="int">
+	     delete from ss_user where id=#{id}
+	</delete>
+	
+	<!-- 用户token表 -->
+	<!-- 根据用户id查询token -->
+	<select id="findAccessTokenByUserid" parameterType="long" resultType="AccessToken">
+	    select * from t_access_token at where at.user_id=#{user_id}
+	</select>
+	
+	<!-- 根据accesstoken 查询token对象 -->
+	<select id="findAccessTokenByAccessToken" parameterType="string" resultType="AccessToken">
+	    select * from t_access_token at where at.access_token=#{access_token}
+	</select>
+	
+	<!-- 保存accesstoken -->
+	<insert id="insertAccessToken" parameterType="AccessToken" useGeneratedKeys="true" keyProperty="id">
+	    insert into t_access_token (user_id,access_token,expires_in,refresh_token,created_time) values (#{user_id},#{access_token},#{expires_in},#{refresh_token},#{created_time})
+	</insert>
+	
+	<!-- 更新accesstoken -->
+	<update id="updateAccessToken" parameterType="AccessToken">
+	    update t_access_token set access_token=#{access_token},expires_in=#{expires_in},refresh_token=#{refresh_token},created_time=#{created_time} where user_id=#{user_id}
+	</update>
+	
+</mapper> 

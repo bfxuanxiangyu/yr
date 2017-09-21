@@ -1,0 +1,6 @@
+
+使用top + left + right(content) 结构  使用left-header.jsp left-main.jsp即可
+
+
+
+
