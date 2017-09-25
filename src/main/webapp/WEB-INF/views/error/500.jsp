@@ -13,30 +13,72 @@
    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
    <meta content="" name="description" />
    <meta content="" name="author" />
-   <link href="${ctx}/static/bootstraptemplate/assets/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
-   <link href="${ctx}/static/bootstraptemplate/assets/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet" />
-   <link href="${ctx}/static/bootstraptemplate/assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
-   <link href="${ctx}/static/bootstraptemplate/css/style.css" rel="stylesheet" />
-   <link href="${ctx}/static/bootstraptemplate/css/style-responsive.css" rel="stylesheet" />
-   <link href="${ctx}/static/bootstraptemplate/css/style-default.css" rel="stylesheet" id="style_color" />
+   <link rel="stylesheet" href="${ctx}/static/bootstrap3/assets/css/bootstrap.min.css" />
+	<link rel="stylesheet" href="${ctx}/static/bootstrap3/assets/css/font-awesome.min.css" />
+	<link rel="stylesheet" href="${ctx}/static/bootstrap3/assets/css/fonts.css?family=Open+Sans:400,300" />
+	<link rel="stylesheet" href="${ctx}/static/bootstrap3/assets/css/ace.min.css" />
+	<link rel="stylesheet" href="${ctx}/static/bootstrap3/assets/css/ace-rtl.min.css" />
+	<link rel="stylesheet" href="${ctx}/static/bootstrap3/assets/css/ace-skins.min.css" />
 </head>
 <!-- END HEAD -->
 <!-- BEGIN BODY -->
 <body class="error-500">
-    <div class="error-wrap">
-        <h1>Ouch!</h1>
-        <h2>Looks like something went wrong</h2>
-        <div class="metro green">
-           <span> 5 </span>
-        </div>
-        <div class="metro yellow">
-            <span> 0 </span>
-        </div>
-        <div class="metro purple">
-            <span> 0 </span>
-        </div>
-        <p>For Updates follow us on <a href="http://xuanxy.blog.51cto.com/">xuanxy</a> , Very soon we will fix the issue. <a href="<c:url value="/"/>"> Return Home </a></p>
-    </div>
+    <div class="page-content">
+						<div class="row">
+							<div class="col-xs-12">
+								<!-- PAGE CONTENT BEGINS -->
+
+								<div class="error-container">
+									<div class="well">
+										<h1 class="grey lighter smaller">
+											<span class="blue bigger-125">
+												<i class="icon-random"></i>
+												500
+											</span>
+											Something Went Wrong
+										</h1>
+
+										<hr />
+										<h3 class="lighter smaller">
+											But we are working
+											<i class="icon-wrench icon-animated-wrench bigger-125"></i>
+											on it!
+										</h3>
+
+										<div class="space"></div>
+
+										<div>
+											<h4 class="lighter smaller">Meanwhile, try one of the following:</h4>
+
+											<ul class="list-unstyled spaced inline bigger-110 margin-15">
+												<li>
+													<i class="icon-hand-right blue"></i>
+													Read the faq
+												</li>
+
+												<li>
+													<i class="icon-hand-right blue"></i>
+													Give us more info on how this specific error occurred!
+												</li>
+											</ul>
+										</div>
+
+										<hr />
+										<div class="space"></div>
+
+										<div class="center">
+											<a href="${ctx}/admin/user/home" class="btn btn-grey">
+												<i class="icon-arrow-left"></i>
+												Go Back
+											</a>
+										</div>
+									</div>
+								</div>
+
+								<!-- PAGE CONTENT ENDS -->
+							</div><!-- /.col -->
+						</div><!-- /.row -->
+					</div>
 </body>
 <!-- END BODY -->
 </html>

@@ -14,11 +14,11 @@ request.setAttribute("begin", begin);
 request.setAttribute("end", end);
 %>
 
-<div class="pagination">
-	<ul>
+<div class="pagination" style="margin: 0px;">
+	<ul class="pagination pull-right no-margin">
 		 <% if (page.hasPreviousPage()){%>
-               	<li><a href="?page=1&sortType=${sortType}&${searchParams}">&lt;&lt;</a></li>
-                <li><a href="?page=${current-1}&sortType=${sortType}&${searchParams}">&lt;</a></li>
+               	<li class="prev disabled"><a href="?page=1&sortType=${sortType}&${searchParams}">&lt;&lt;</a></li>
+                <li class="prev disabled"><a href="?page=${current-1}&sortType=${sortType}&${searchParams}">&lt;</a></li>
          <%}else{%>
                 <li class="disabled"><a href="#">&lt;&lt;</a></li>
                 <li class="disabled"><a href="#">&lt;</a></li>
@@ -30,14 +30,14 @@ request.setAttribute("end", end);
                     <li class="active"><a href="?page=${i}&sortType=${sortType}&${searchParams}">${i}</a></li>
                 </c:when>
                 <c:otherwise>
-                    <li><a href="?page=${i}&sortType=${sortType}&${searchParams}">${i}</a></li>
+                    <li class="prev disabled"><a href="?page=${i}&sortType=${sortType}&${searchParams}">${i}</a></li>
                 </c:otherwise>
             </c:choose>
         </c:forEach>
 	  
 	  	 <% if (page.hasNextPage()){%>
-               	<li><a href="?page=${current+1}&sortType=${sortType}&${searchParams}">&gt;</a></li>
-                <li><a href="?page=${page.totalPages}&sortType=${sortType}&${searchParams}">&gt;&gt;</a></li>
+               	<li class="prev disabled"><a href="?page=${current+1}&sortType=${sortType}&${searchParams}">&gt;</a></li>
+                <li class="prev disabled"><a href="?page=${page.totalPages}&sortType=${sortType}&${searchParams}">&gt;&gt;</a></li>
          <%}else{%>
                 <li class="disabled"><a href="#">&gt;</a></li>
                 <li class="disabled"><a href="#">&gt;&gt;</a></li>

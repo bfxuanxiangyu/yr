@@ -10,43 +10,25 @@
 </head>
 
 <body>
+<ul class="breadcrumb">
+	<li>
+		<i class="icon-home home-icon"></i>
+		<a href="#">系统管理</a>
+	</li>
 
+	<li>
+		<a href="${ctx}/admin/user/">用户列表</a>
+	</li>
+	<li class="active">编辑用户</li>
+</ul>
 
-<div class="row-fluid">
-   <div class="span12">
-       <!-- BEGIN THEME CUSTOMIZER-->
-     <!-- END THEME CUSTOMIZER-->
-    <!-- BEGIN PAGE TITLE & BREADCRUMB-->
-     <h3 class="page-title"></h3>
-     <ul class="breadcrumb">
-         <li>
-             <a href="#">系统管理</a>
-             <span class="divider">/</span>
-         </li>
-         <li>
-             <a href="${ctx}/admin/user/">用户列表</a>
-             <span class="divider">/</span>
-         </li>
-         <li class="active">
-            	 用户管理
-         </li>
-     </ul>
-     <!-- END PAGE TITLE & BREADCRUMB-->
-   </div>
-</div>
-<!-- END PAGE HEADER-->
-<!-- BEGIN PAGE CONTENT-->
-
-<!-- BEGIN ADVANCED TABLE widget-->
-<div class="row-fluid">
-    <div class="span12">
-    <!-- BEGIN EXAMPLE TABLE widget-->
-    <!-- BEGIN BUTTON PORTLET-->
-          <div class="widget-body">
-              <form:form id="inputForm" modelAttribute="adminUser" action="${ctx}/admin/user/saveOrUpdate" method="post" class="form-horizontal">
+<div class="page-content">
+	<div class="row">
+		<div class="col-xs-12">
+			<form:form id="inputForm" modelAttribute="adminUser" action="${ctx}/admin/user/saveOrUpdate" method="post" class="form-horizontal">
 				<input type="hidden" name="id" value="${adminUser.id}"/>
-				<div class="control-group">
-					<label class="control-label" for="loginName">登录名</label>
+				<div class="form-group">
+					<label class="col-sm-2 control-label no-padding-right" for="loginName">登录名</label>
 					<c:choose>
 					   <c:when test="${empty adminUser.loginName}">
 						   	<div class="controls">
@@ -60,37 +42,38 @@
 					   </c:otherwise>
 					</c:choose>
 				</div>
-				<div class="control-group">
-					<label class="control-label" for="name">用户名</label>
+				<div class="form-group">
+					<label class="col-sm-2 control-label no-padding-right" for="name">用户名</label>
 					<div class="controls">
 						<input type="text" id="name" name="name" value="${adminUser.name}" class="input-large required"/>
 					</div>
 				</div>
 				<!-- 如果是新增怎显示 -->
 				<c:if test="${empty adminUser.id}">
-					<div class="control-group">
-						<label for="plainPassword" class="control-label">密码</label>
+					<div class="form-group">
+						<label for="plainPassword" class="col-sm-2 control-label no-padding-right">密码</label>
 						<div class="controls">
 							<input type="password" id="plainPassword" name="plainPassword" class="input-large"/>
 						</div>
 					</div>
-					<div class="control-group">
-						<label for="confirmPassword" class="control-label">确认密码</label>
+					<div class="form-group">
+						<label for="confirmPassword" class="col-sm-2 control-label no-padding-right">确认密码</label>
 						<div class="controls">
 							<input type="password" id="confirmPassword" name="confirmPassword" class="input-large" />
 						</div>
 					</div>
 				</c:if>
-				<div class="control-group">
-				    <label for="rolesList" class="control-label">角色</label>
+				<div class="form-group">
+				    <label for="rolesList" class="col-sm-2 control-label no-padding-right">角色</label>
 				    <div class="controls">
 			    		<c:forEach items="${roles}" var="role">
-							<input type="radio" name="roleId" value="${role.id}" <c:if test="${role.id==adminUser.roleId}"> checked="checked" </c:if>  />${role.name }
+							<input type="radio" name="roleId" value="${role.id}" <c:if test="${role.id==adminUser.roleId}"> checked="checked" </c:if>  
+							 required="required"/>${role.name }
 						</c:forEach>
 				    </div>
 				</div>	
-                      <div class="control-group">
-                          <label class="control-label" for="remark">备注</label>
+                      <div class="form-group">
+                          <label class="col-sm-2 control-label no-padding-right" for="remark">备注</label>
                           <div class="controls">
                               <textarea class="input-xxlarge" rows="2" cols="100" id="remark" name="remark" >${adminUser.remark}</textarea>
                           </div>
@@ -100,14 +83,15 @@
                           <button type="button" class="btn" onclick="history.back()"><i class="icon-remove"></i> Cancel</button>
                       </div>
 			</form:form>
-          </div>
-    </div>
-</div>
+		</div>
+	</div>	
+</div>	
 
 <style type="text/css">
 .zeusError{
 	color: red;
 }
+
 </style>	
 <!-- begin script -->	
 <script>

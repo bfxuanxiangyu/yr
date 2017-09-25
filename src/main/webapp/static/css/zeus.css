@@ -3,7 +3,9 @@
 .zeusError{
 		color: red;
 }
-
+.error{
+	color: red;
+}
 table td{
 	overflow:hidden;white-space:nowrap;text-overflow:ellipsis;
 }

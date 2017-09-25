@@ -14,87 +14,69 @@
    <meta charset="utf-8" />
    <title>新增用户</title>
 </head>
- 
-<div class="row-fluid">
-    <div class="span12" style="margin-top: 25px;">
-		 <c:if test="${not empty message}">
-			<div id="message" class="alert alert-success"><button data-dismiss="alert" class="close">×</button>${message}</div>
-		</c:if>
-		<shiro:hasPermission name="user:edit">
-			<div style="padding-bottom: 15px;">
-				<button class="btn  btn-info" type="button" onclick="window.location.href='${ctx}/admin/user/create'">新增用户</button>
-			</div>
-		</shiro:hasPermission>	
-         <table class="table table-striped table-bordered table_pad" id="sample_1">
-             <thead>
-             <tr>
-                 <th width="3%"><input type="checkbox" class="group-checkable" data-set="#sample_1 .checkboxes" /></th>
-                 <th width="8%">登录名</th>
-                 <th width="8%" class="hidden-phone">用户名</th>
-                 <th width="10%" class="hidden-phone">角色</th>
-                 <th width="20%" class="hidden-phone">注册时间</th>
-                 <th width="15%" class="hidden-phone">操作</th>
-             </tr>
-             </thead>
-             <tbody>
-             <c:forEach items="${users.content}" var="user">
-             	<tr class="odd gradeX">
-               <td><input type="checkbox" name="checkboxName" class="checkboxes" value="${user.id}" /></td>
-                  <td>${user.loginName}</td>
-                  <td class="hidden-phone">${user.name}</td>
-                  <td class="hidden-phone">${user.permissionName}</td>
-                  <td class="center hidden-phone"><fmt:formatDate value="${user.createdTime}" pattern="yyyy年MM月dd日  HH时mm分ss秒" /></td>
-                  <td class="hidden-phone">
-                  	<shiro:hasPermission name="user:edit"> 
-<%-- 	                    	${ctx}/admin/user/update/${user.id} --%>
-					  	<a href="${ctx}/admin/user/update/${user.id }?index=systemId"><span class="label label-success">编辑</span></a>
-					  	&nbsp;|&nbsp;
-					  	<a href="${ctx}/admin/user/delete/${user.id }?index=systemId"><span class="label label-warning">删除</span></a>
-					  	&nbsp;|&nbsp;
-					  	<a href="#myModal1${user.id }" data-toggle="modal"><span class="label">修改密码</span></a>
-				</shiro:hasPermission>
-                  </td>
-              </tr>
-              
-              <div id="myModal1${user.id }" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1" aria-hidden="true">
-	             <div class="modal-header">
-	                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-	                 <h3 id="myModalLabel1">修改密码</h3>
-	             </div>
-	             <div class="modal-body">
-					<div class="control-group">
-						<label class="control-label">请输入新密码:</label>
-						<div class="controls">
-							<input type="password" id="plainPassword${user.id }" name="plainPassword"  class="input-large required"/>
-						</div>			
-					</div>
-					<div class="control-group">
-						<label class="control-label">新密码确认:</label>
-						<div class="controls">
-							<input type="password" id="repeatPassword${user.id }"   class="input-large required" onblur="checkRepate(${user.id })"/>
-							<label id="warn${user.id }" style="color: red;display: none;">两次密码不一致!</label>
-							<label id="isnull${user.id }" style="color: red;display: none;">密码必填</label>
-						</div>			
-					</div>
-					
-	             </div>
-	             <div class="modal-footer">
-	                 <button class="btn" data-dismiss="modal" aria-hidden="true">关闭</button>
-	                 <button class="btn btn-primary" onclick="subForm('${user.id }')" id="savepwd">保存</button>
-	             </div>
-         	</div>    
-	</c:forEach>
-             </tbody>
-         </table>
-         <tags:pagination page="${users}" paginationSize="5"/>
 
-    </div>
+
+<div class="page-content">
+			<!-- PAGE CONTENT BEGINS -->
+			<div class="page-header">
+				<h1>
+					系统管理
+					<small>
+						<i class="icon-double-angle-right"></i>
+						用户列表
+					</small>
+				</h1>
+			</div>
+			<div class="row">
+				<div class="col-xs-12">
+					<c:if test="${not empty message}">
+						<div id="message" class="alert alert-success"><button data-dismiss="alert" class="close">×</button>${message}</div>
+					</c:if>
+					<shiro:hasPermission name="user:edit">
+						<div style="padding-bottom: 15px;">
+							<button class="btn  btn-info" type="button" onclick="window.location.href='${ctx}/admin/user/create'">新增用户</button>
+						</div>
+					</shiro:hasPermission>	
+					<div class="table-responsive">
+						<table id="sample-table-1" class="table table-striped table-bordered table-hover">
+							<thead>
+								<tr>
+									<th class="center"><label><input type="checkbox" class="ace" /><span class="lbl"></span></label></th>
+									<th>登录名</th>
+									<th>用户名</th>
+									<th>角色</th>
+									<th class="hidden-480">注册时间</th>
+									<th></th>
+								</tr>
+							</thead>
+							<tbody>
+								<c:forEach items="${users.content}" var="user">
+									<tr>
+									<td class="center"><label><input type="checkbox" class="ace" /><span class="lbl"></span></label></td>
+										<td>${user.loginName}</td>
+										<td>${user.name}</td>
+										<td class="hidden-480">${user.permissionName}</td>
+										<td><fmt:formatDate value="${user.createdTime}" pattern="yyyy年MM月dd日  HH时mm分ss秒" /></td>
+										<td>
+										<shiro:hasPermission name="user:edit"> 
+											  	<a href="${ctx}/admin/user/update/${user.id }?index=systemId"><span class="label label-success">编辑</span></a>
+											  	&nbsp;|&nbsp;
+											  	<a href="${ctx}/admin/user/delete/${user.id }?index=systemId"><span class="label label-warning">删除</span></a>
+											  	&nbsp;|&nbsp;
+											  	<a href="#myModal1${user.id }" data-toggle="modal"><span class="label">修改密码</span></a>
+										</shiro:hasPermission>
+										</td>
+									</tr>
+								</c:forEach>
+							</tbody>
+						</table>
+						<tags:pagination page="${users}" paginationSize="5"/>
+					</div><!-- /.table-responsive -->
+				</div><!-- /span -->
+			</div>
+
+
 </div>
-<form id="upPasswordForm" modelAttribute="AdminUser" action="${ctx}/admin/user/updatePassword" 
-              			method="post" class="form-horizontal" enctype="multipart/form-data">
-			         <input type="hidden" id="newpwd" name="plainPassword"  class="input-large required"/>	
-			         <input type="hidden" id="auid" name="id"   class="input-large required"/>	
-				</form>
 
 <script type="text/javascript">
  

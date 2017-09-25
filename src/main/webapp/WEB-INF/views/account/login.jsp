@@ -16,12 +16,12 @@
    <meta content="" name="description" />
    <meta content="" name="author" />
    <link type="image/x-icon" href="${ctx}/static/images/favicon.ico" rel="shortcut icon">
-   <link href="${ctx}/static/bootstraptemplate/assets/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
-   <link href="${ctx}/static/bootstraptemplate/assets/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet" />
-   <link href="${ctx}/static/bootstraptemplate/assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
-   <link href="${ctx}/static/bootstraptemplate/css/style.css" rel="stylesheet" />
-   <link href="${ctx}/static/bootstraptemplate/css/style-responsive.css" rel="stylesheet" />
-   <link href="${ctx}/static/bootstraptemplate/css/style-default.css" rel="stylesheet" id="style_color" />
+   <link rel="stylesheet" href="${ctx}/static/bootstrap3/assets/css/bootstrap.min.css" />
+	<link rel="stylesheet" href="${ctx}/static/bootstrap3/assets/css/font-awesome.min.css" />
+	<link rel="stylesheet" href="${ctx}/static/bootstrap3/assets/css/fonts.css?family=Open+Sans:400,300" />
+	<link rel="stylesheet" href="${ctx}/static/bootstrap3/assets/css/ace.min.css" />
+	<link rel="stylesheet" href="${ctx}/static/bootstrap3/assets/css/ace-rtl.min.css" />
+	<link rel="stylesheet" href="${ctx}/static/bootstrap3/assets/css/ace-skins.min.css" />
    
    <style type="text/css">
    		.login-title{
@@ -32,73 +32,78 @@
 </head>
 <!-- END HEAD -->
 <!-- BEGIN BODY -->
-<body class="lock">
-    <div class="lock-header">
-        <!-- BEGIN LOGO -->
-        <span class="login-title">后台管理系统</span>
-        <!-- END LOGO -->
-    </div>
-    <div class="login-wrap">
-        <div class="metro single-size red">
-            <div class="locked">
-                <i class="icon-lock"></i>
-                <span>Login</span>
-            </div>
-        </div>
-        <form action="${ctx}/login" method="post">
-	        <div class="metro double-size green">
-	             <div class="input-append lock-input">
-	                 <input type="text"  class="form-username form-control" id="form-username" 
-	                 	name="username"  placeholder="Username" required="required">
-	             </div>
-	        </div>
-	        <div class="metro double-size yellow">
-	             <div class="input-append lock-input">
-	                 <input type="password" class="form-password form-control" id="form-password" 
-	                 	name="password"  placeholder="Password" required="required">
-	             </div>
-	        </div>
-	        <div class="metro single-size terques login">
-	                <button type="submit" class="btn login-btn">
-	                    Login
-	                    <i class=" icon-long-arrow-right"></i>
-	                </button>
-	        </div>
-	        <div class="metro double-size navy-blue ">
-	            <!-- <a href="index.html" class="social-link">
-	                <i class="icon-facebook-sign"></i>
-	                <span>Facebook Login</span>
-	            </a> -->
-	        </div>
-	        <div class="metro single-size deep-red">
-	            <!-- <a href="index.html" class="social-link">
-	                <i class="icon-google-plus-sign"></i>
-	                <span>Google Login</span>
-	            </a> -->
-	        </div>
-	        <div class="metro double-size blue">
-	            <!-- <a href="index.html" class="social-link">
-	                <i class="icon-twitter-sign"></i>
-	                <span>Twitter Login</span>
-	            </a> -->
-	        </div>
-	        <div class="metro single-size purple">
-	            <!-- <a href="index.html" class="social-link">
-	                <i class="icon-skype"></i>
-	                <span>Skype Login</span>
-	            </a> -->
-	        </div>
-	        <div class="login-footer">
-	            <div class="remember-hint pull-left">
-	                <input type="checkbox" id="rememberMe" name="rememberMe"> 
-	                <label for="rememberMe" style="display: inline;">Remember Me</label> 
-	            </div>
-	            <div class="forgot-hint pull-right">
-	                <a id="forget-password" class="" href="javascript:;">Forgot Password?</a>
-	            </div>
-	        </div>
-        </form>
-    </div>
+<body class="login-layout">
+		<div class="main-container">
+			<div class="main-content">
+				<div class="row">
+					<div class="col-sm-10 col-sm-offset-1">
+						<div class="login-container">
+							<div class="center">
+								<h1>
+									<i class="icon-leaf green"></i>
+									<span class="red">后台</span>
+									<span class="white">管理平台</span>
+								</h1>
+								<h4 class="blue">&copy; YIREN</h4>
+							</div>
+
+							<div class="space-6"></div>
+
+							<div class="position-relative">
+								<div id="login-box" class="login-box visible widget-box no-border">
+									<div class="widget-body">
+										<div class="widget-main">
+											<h4 class="header blue lighter bigger">
+												<i class="icon-coffee green"></i>
+												Please Enter Your Information
+											</h4>
+
+											<div class="space-6"></div>
+
+											<form  action="${ctx}/login" method="post">
+												<fieldset>
+													<label class="block clearfix">
+														<span class="block input-icon input-icon-right">
+															<input type="text"  class="form-username form-control" id="form-username" 
+	                 											name="username"  placeholder="Username" required="required">
+															<i class="icon-user"></i>
+														</span>
+													</label>
+
+													<label class="block clearfix">
+														<span class="block input-icon input-icon-right">
+															<input type="password" class="form-password form-control" id="form-password" 
+	                 											name="password"  placeholder="Password" required="required">
+															<i class="icon-lock"></i>
+														</span>
+													</label>
+
+													<div class="space"></div>
+
+													<div class="clearfix">
+														<label class="inline">
+															<input type="checkbox" id="rememberMe" name="rememberMe" class="ace" > 
+															<span class="lbl"> Remember Me</span>
+														</label>
+														 <button type="submit" class="width-35 pull-right btn btn-sm btn-primary">
+										                    Login
+										                    <i class="icon-key"></i>
+										                </button>
+													</div>
+
+													<div class="space-4"></div>
+												</fieldset>
+											</form>
+
+										</div><!-- /widget-main -->
+									</div><!-- /widget-body -->
+								</div><!-- /login-box -->
+							</div><!-- /position-relative -->
+						</div>
+					</div><!-- /.col -->
+				</div><!-- /.row -->
+			</div>
+		</div><!-- /.main-container -->
 </body>
 <!-- END BODY -->
 </html>
